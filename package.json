@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "scrape": "node scrape-bdxc.mjs",
+    "scrape": "node scrape-bdxc.mjs && node scrape-sortie13.mjs && node scrape-arkeaarena.mjs && node scrape-theatrefemina.mjs",
+    "scrape:bdxc": "node scrape-bdxc.mjs",
+    "scrape:sortie13": "node scrape-sortie13.mjs",
+    "scrape:arkea": "node scrape-arkeaarena.mjs",
+    "scrape:femina": "node scrape-theatrefemina.mjs",
     "dry": "node scrape-bdxc.mjs --dry",
+    "dry:all": "node scrape-sortie13.mjs --dry && node scrape-arkeaarena.mjs --dry && node scrape-theatrefemina.mjs --dry",
     "dump": "node scrape-bdxc.mjs --dump --dry"
   },
   "keywords": [],

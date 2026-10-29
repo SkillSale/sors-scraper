@@ -1,4 +1,4 @@
-name: Scrape bdxc.fr
+name: Scrape events
 on:
   schedule:
     - cron: "17 4 * * *"   # tous les jours vers 5h-6h (heure de Paris)
@@ -6,13 +6,24 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        source: [bdxc, sortie13, arkeaarena, theatrefemina]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      - run: node scrape-bdxc.mjs
+      - name: Scrape ${{ matrix.source }}
+        run: |
+          case "${{ matrix.source }}" in
+            bdxc) node scrape-bdxc.mjs ;;
+            sortie13) node scrape-sortie13.mjs ;;
+            arkeaarena) node scrape-arkeaarena.mjs ;;
+            theatrefemina) node scrape-theatrefemina.mjs ;;
+          esac
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}

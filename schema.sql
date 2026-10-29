@@ -1,7 +1,10 @@
 -- =====================================================================
--- SORS — fonction d'import des événements externes (bdxc.fr, etc.)
+-- SORS — fonction d'import des événements externes
+-- (bdxc.fr, sortie-13.com, arkeaarena.com, theatrefemina.com, etc.)
 -- À coller dans Supabase > SQL Editor. Ne crée AUCUNE table : utilise
 -- events, event_occurrences, venues et event_source_aliases existantes.
+-- Sources utilisées par les scrapers : bdxc | sortie13 | arkeaarena | theatrefemina
+-- (vérifie que ta contrainte CHECK sur events.source les accepte).
 -- =====================================================================
 
 -- (Recommandé) empêche deux événements avec la même source + source_id.
